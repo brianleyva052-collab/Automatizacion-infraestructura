@@ -1,0 +1,278 @@
+# docker_container.app:
+resource "docker_container" "app" {
+    attach                                      = false
+    bridge                                      = [90mnull[0m[0m
+    command                                     = [
+        "python",
+        "-m",
+        "http.server",
+        "8000",
+    ]
+    container_read_refresh_timeout_milliseconds = 15000
+    cpu_set                                     = [90mnull[0m[0m
+    cpu_shares                                  = 0
+    domainname                                  = [90mnull[0m[0m
+    entrypoint                                  = []
+    env                                         = []
+    hostname                                    = "e66ee140b9ef"
+    id                                          = "e66ee140b9efed117b610c53057a428e19723be6bd0dc7acda7aa793efc32411"
+    image                                       = "sha256:979e5a8a56846771598d47ebf1f8a75b46155104e168a0b237c0783c1dedff8a"
+    init                                        = false
+    ipc_mode                                    = "private"
+    log_driver                                  = "json-file"
+    logs                                        = false
+    max_retry_count                             = 0
+    memory                                      = 0
+    memory_reservation                          = 0
+    memory_swap                                 = 0
+    must_run                                    = true
+    name                                        = "servidor-app"
+    network_data                                = [
+        {
+            gateway                   = "10.10.0.1"
+            global_ipv6_address       = [90mnull[0m[0m
+            global_ipv6_prefix_length = 0
+            ip_address                = "10.10.0.20"
+            ip_prefix_length          = 24
+            ipv6_gateway              = [90mnull[0m[0m
+            mac_address               = "ce:de:6d:5b:66:41"
+            network_name              = "red-privada"
+        },
+    ]
+    network_mode                                = "bridge"
+    pid_mode                                    = [90mnull[0m[0m
+    privileged                                  = false
+    publish_all_ports                           = false
+    read_only                                   = false
+    remove_volumes                              = true
+    restart                                     = "no"
+    rm                                          = false
+    runtime                                     = "runc"
+    security_opts                               = []
+    shm_size                                    = 64
+    start                                       = true
+    stdin_open                                  = false
+    stop_signal                                 = [90mnull[0m[0m
+    stop_timeout                                = 0
+    tty                                         = false
+    user                                        = [90mnull[0m[0m
+    userns_mode                                 = [90mnull[0m[0m
+    wait                                        = false
+    wait_timeout                                = 60
+    working_dir                                 = "/"
+
+    networks_advanced {
+        aliases      = []
+        ipv4_address = "10.10.0.20"
+        ipv6_address = [90mnull[0m[0m
+        mac_address  = [90mnull[0m[0m
+        name         = "red-privada"
+    }
+}
+
+# docker_container.db:
+resource "docker_container" "db" {
+    attach                                      = false
+    bridge                                      = [90mnull[0m[0m
+    command                                     = [
+        "postgres",
+    ]
+    container_read_refresh_timeout_milliseconds = 15000
+    cpu_set                                     = [90mnull[0m[0m
+    cpu_shares                                  = 0
+    domainname                                  = [90mnull[0m[0m
+    entrypoint                                  = [
+        "docker-entrypoint.sh",
+    ]
+    env                                         = (sensitive value)
+    hostname                                    = "165dc6b0b483"
+    id                                          = "165dc6b0b483e48aaeddeaa4a728630ca7f06093d5bd2e7041943bae74e4e67e"
+    image                                       = "sha256:81bd698b4594e751a3269e4dcd3e03a4a0ec0daf7b72e7aa1abd43cce9887542"
+    init                                        = false
+    ipc_mode                                    = "private"
+    log_driver                                  = "json-file"
+    logs                                        = false
+    max_retry_count                             = 0
+    memory                                      = 0
+    memory_reservation                          = 0
+    memory_swap                                 = 0
+    must_run                                    = true
+    name                                        = "servidor-db"
+    network_data                                = [
+        {
+            gateway                   = "10.10.0.1"
+            global_ipv6_address       = [90mnull[0m[0m
+            global_ipv6_prefix_length = 0
+            ip_address                = "10.10.0.30"
+            ip_prefix_length          = 24
+            ipv6_gateway              = [90mnull[0m[0m
+            mac_address               = "22:5b:58:2a:d5:cb"
+            network_name              = "red-privada"
+        },
+    ]
+    network_mode                                = "bridge"
+    pid_mode                                    = [90mnull[0m[0m
+    privileged                                  = false
+    publish_all_ports                           = false
+    read_only                                   = false
+    remove_volumes                              = true
+    restart                                     = "no"
+    rm                                          = false
+    runtime                                     = "runc"
+    security_opts                               = []
+    shm_size                                    = 64
+    start                                       = true
+    stdin_open                                  = false
+    stop_signal                                 = "SIGINT"
+    stop_timeout                                = 0
+    tty                                         = false
+    user                                        = [90mnull[0m[0m
+    userns_mode                                 = [90mnull[0m[0m
+    wait                                        = false
+    wait_timeout                                = 60
+    working_dir                                 = "/"
+
+    networks_advanced {
+        aliases      = []
+        ipv4_address = "10.10.0.30"
+        ipv6_address = [90mnull[0m[0m
+        mac_address  = [90mnull[0m[0m
+        name         = "red-privada"
+    }
+}
+
+# docker_container.web:
+resource "docker_container" "web" {
+    attach                                      = false
+    bridge                                      = [90mnull[0m[0m
+    command                                     = [
+        "nginx",
+        "-g",
+        "daemon off;",
+    ]
+    container_read_refresh_timeout_milliseconds = 15000
+    cpu_set                                     = [90mnull[0m[0m
+    cpu_shares                                  = 0
+    domainname                                  = [90mnull[0m[0m
+    entrypoint                                  = [
+        "/docker-entrypoint.sh",
+    ]
+    env                                         = []
+    hostname                                    = "abcc256a686e"
+    id                                          = "abcc256a686e26032971d3cd5be99bae2cf8411cbd78a305f31144580baaafed"
+    image                                       = "sha256:3dd08163706a20b20622f310ec10258cc96e9007ab357f7201955bc880ac17f4"
+    init                                        = false
+    ipc_mode                                    = "private"
+    log_driver                                  = "json-file"
+    logs                                        = false
+    max_retry_count                             = 0
+    memory                                      = 0
+    memory_reservation                          = 0
+    memory_swap                                 = 0
+    must_run                                    = true
+    name                                        = "servidor-web"
+    network_data                                = [
+        {
+            gateway                   = "10.10.0.1"
+            global_ipv6_address       = [90mnull[0m[0m
+            global_ipv6_prefix_length = 0
+            ip_address                = "10.10.0.10"
+            ip_prefix_length          = 24
+            ipv6_gateway              = [90mnull[0m[0m
+            mac_address               = "92:2b:e5:1d:e7:f8"
+            network_name              = "red-privada"
+        },
+    ]
+    network_mode                                = "bridge"
+    pid_mode                                    = [90mnull[0m[0m
+    privileged                                  = false
+    publish_all_ports                           = false
+    read_only                                   = false
+    remove_volumes                              = true
+    restart                                     = "no"
+    rm                                          = false
+    runtime                                     = "runc"
+    security_opts                               = []
+    shm_size                                    = 64
+    start                                       = true
+    stdin_open                                  = false
+    stop_signal                                 = "SIGQUIT"
+    stop_timeout                                = 0
+    tty                                         = false
+    user                                        = [90mnull[0m[0m
+    userns_mode                                 = [90mnull[0m[0m
+    wait                                        = false
+    wait_timeout                                = 60
+    working_dir                                 = "/"
+
+    networks_advanced {
+        aliases      = []
+        ipv4_address = "10.10.0.10"
+        ipv6_address = [90mnull[0m[0m
+        mac_address  = [90mnull[0m[0m
+        name         = "red-privada"
+    }
+
+    ports {
+        external = 80
+        internal = 80
+        ip       = "0.0.0.0"
+        protocol = "tcp"
+    }
+}
+
+# docker_image.app:
+resource "docker_image" "app" {
+    id           = "sha256:979e5a8a56846771598d47ebf1f8a75b46155104e168a0b237c0783c1dedff8apython:3.12-alpine"
+    image_id     = "sha256:979e5a8a56846771598d47ebf1f8a75b46155104e168a0b237c0783c1dedff8a"
+    keep_locally = true
+    name         = "python:3.12-alpine"
+    repo_digest  = "python@sha256:1b668429b3511ab407d8e00648891631b0b1a4d7e15e3ca70f38ab5b91ad4ab4"
+}
+
+# docker_image.db:
+resource "docker_image" "db" {
+    id           = "sha256:81bd698b4594e751a3269e4dcd3e03a4a0ec0daf7b72e7aa1abd43cce9887542postgres:16-alpine"
+    image_id     = "sha256:81bd698b4594e751a3269e4dcd3e03a4a0ec0daf7b72e7aa1abd43cce9887542"
+    keep_locally = true
+    name         = "postgres:16-alpine"
+    repo_digest  = "postgres@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea"
+}
+
+# docker_image.web:
+resource "docker_image" "web" {
+    id           = "sha256:3dd08163706a20b20622f310ec10258cc96e9007ab357f7201955bc880ac17f4nginx:alpine"
+    image_id     = "sha256:3dd08163706a20b20622f310ec10258cc96e9007ab357f7201955bc880ac17f4"
+    keep_locally = true
+    name         = "nginx:alpine"
+    repo_digest  = "nginx@sha256:df221db836e1754089190208cee7eeda94f233197056426eda74a43ab1abeac2"
+}
+
+# docker_network.lab:
+resource "docker_network" "lab" {
+    attachable  = false
+    driver      = "bridge"
+    id          = "3a06317d4714d0b29d8a608a709b6b2a64f9488b911811d709ef2ab7fe98e5cc"
+    ingress     = false
+    internal    = false
+    ipam_driver = "default"
+    ipv6        = false
+    name        = "red-privada"
+    options     = {}
+    scope       = "local"
+
+    ipam_config {
+        gateway  = "10.10.0.1"
+        ip_range = [90mnull[0m[0m
+        subnet   = "10.10.0.0/24"
+    }
+}
+
+
+Outputs:
+
+app_ip = "10.10.0.20"
+db_ip = "10.10.0.30"
+network_id = "3a06317d4714d0b29d8a608a709b6b2a64f9488b911811d709ef2ab7fe98e5cc"
+web_ip = "10.10.0.10"
+web_url = "http://localhost:80"

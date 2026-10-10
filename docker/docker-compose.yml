@@ -1,0 +1,32 @@
+services:
+  web:
+    image: nginx:alpine
+    container_name: compose-web
+    ports:
+      - "8080:80"
+    networks:
+      red:
+        ipv4_address: 10.20.0.10
+
+  app:
+    image: python:3.12-alpine
+    container_name: compose-app
+    command: python -m http.server 8000
+    networks:
+      red:
+        ipv4_address: 10.20.0.20
+
+  db:
+    image: postgres:16-alpine
+    container_name: compose-db
+    environment:
+      POSTGRES_PASSWORD: lab_password_123
+    networks:
+      red:
+        ipv4_address: 10.20.0.30
+
+networks:
+  red:
+    ipam:
+      config:
+        - subnet: 10.20.0.0/24

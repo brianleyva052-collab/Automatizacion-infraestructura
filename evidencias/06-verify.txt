@@ -1,0 +1,36 @@
+==> terraform validate
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+
+==> Contenedores en ejecución
+CONTAINER ID   IMAGE                                               COMMAND                  CREATED              STATUS                      PORTS                    NAMES
+abcc256a686e   3dd08163706a                                        "/docker-entrypoint.…"   About a minute ago   Up About a minute           0.0.0.0:80->80/tcp       servidor-web
+e66ee140b9ef   979e5a8a5684                                        "python -m http.serv…"   About a minute ago   Up About a minute                                    servidor-app
+165dc6b0b483   81bd698b4594                                        "docker-entrypoint.s…"   About a minute ago   Up About a minute           5432/tcp                 servidor-db
+d36641a99150   ghcr.io/digininja/dvwa:latest                       "docker-php-entrypoi…"   2 months ago         Up 20 minutes               127.0.0.1:4280->80/tcp   dvwa-dvwa-1
+5bf543f548ba   mariadb:10                                          "docker-entrypoint.s…"   2 months ago         Up 20 minutes               3306/tcp                 dvwa-db-1
+022408d1f727   hackingetico-ctf-explotacion-main-activemq-target   "/__cacert_entrypoin…"   3 months ago         Up 20 minutes (unhealthy)                            activemq-target
+3ca0ce5a1fef   hackingetico-ctf-explotacion-main-struts-target     "catalina.sh run"        3 months ago         Up 20 minutes (healthy)                              struts-target
+0b384c304414   hackingetico-ctf-explotacion-main-drupal-target     "entrypoint.sh apach…"   3 months ago         Up 20 minutes (healthy)                              drupal-target
+8518f3e6f51b   hackingetico-ctf-explotacion-main-attacker          "/bin/bash"              3 months ago         Up 20 minutes                                        attacker
+
+==> Redes Docker
+NETWORK ID     NAME                                              DRIVER    SCOPE
+64cb2cef4402   bridge                                            bridge    local
+f49c82c1c28b   dvwa_dvwa                                         bridge    local
+66a3e580c3a5   hackingetico-ctf-explotacion-main_hacking-stage   bridge    local
+5014c8cbbdb0   host                                              host      local
+deb164194a0c   none                                              null      local
+3a06317d4714   red-privada                                       bridge    local
+
+==> Ping a los servidores
+OK   10.10.0.10
+OK   10.10.0.20
+OK   10.10.0.30
+
+==> Comunicación entre servidores
+OK   web -> app
+OK   app -> db
+
+==> Servicio HTTP
+HTTP/1.1 200 OK
